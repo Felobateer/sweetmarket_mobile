@@ -2,22 +2,14 @@ import 'package:flutter/material.dart';
 import '../widgets/inputs/formInput.dart';
 import '../widgets/texts/title.dart';
 import '../widgets/buttons/formBtn.dart';
+import '../widgets/boxes/navbar.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: const Color(0xFFD97706),
-        titleTextStyle: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          fontFamily: 'Roboto',
-        ),
-      ),
+      appBar: Navbar(text: 'Login'),
       body: Center(
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),

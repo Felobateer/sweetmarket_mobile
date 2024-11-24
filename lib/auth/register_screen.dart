@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../widgets/boxes/navbar.dart';
+import '../widgets/texts/title.dart';
+import '../widgets/inputs/formInput.dart';
+import '../widgets/buttons/formBtn.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -6,9 +10,43 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
-      body: const Center(
-        child: Text('This is the Register Screen'),
+      appBar: Navbar(text: 'Register'),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TitleCustom(text: 'sweetmarket'),
+              SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: FormInput(label: 'Last Name', hint: 'Smith'),
+                  ),
+                  SizedBox(width: 16), // Add spacing between the inputs
+                  Expanded(
+                    child: FormInput(label: 'First Name', hint: 'Joe'),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              FormInput(label: 'Email', hint: 'joe@example.com'),
+              SizedBox(height: 20),
+              FormInput(label: 'Password', hint: '******'),
+              SizedBox(height: 20),
+              Formbtn(
+                content: 'Register',
+                action: () {
+                  print('register btn clicked');
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
