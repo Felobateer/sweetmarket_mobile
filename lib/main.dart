@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sweetmarket/pages/home.dart';
 import 'auth/login_screen.dart';
 import 'auth/register_screen.dart';
 import 'auth/forgot_password_screen.dart';
 import 'auth/reset_password_screen.dart';
+import 'services/index.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+      ChangeNotifierProvider(create: (context) => MyData(), child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -17,7 +21,8 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginScreen(),
+        '/': (context) => const Home(),
+        '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
         '/reset-password': (context) => const ResetPasswordScreen(),
