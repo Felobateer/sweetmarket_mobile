@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 class Appbar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? left;
-  final Widget? center;
   final Widget? right;
+  final double height; // Add a height parameter
 
-  const Appbar({Key? key, this.left, this.center, this.right})
-      : super(key: key);
+  const Appbar({
+    this.left,
+    this.right,
+    this.height = kToolbarHeight, // Default height if none is provided
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +23,11 @@ class Appbar extends StatelessWidget implements PreferredSizeWidget {
         color: Colors.white,
         fontFamily: 'Roboto',
       ),
-      leading: left,
-      title: center,
-      actions: [
-        if (right != null) right!,
-      ],
+      leading: left, // Custom left widget (e.g., logo)
+      actions: [right ?? Container()], // Custom right widget (e.g., buttons)
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(height); // Set custom height
 }

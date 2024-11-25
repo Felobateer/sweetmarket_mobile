@@ -10,6 +10,7 @@ dependencies:
   provider: ^6.0.5
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.15
 
 dev_dependencies:
   flutter_test:
@@ -18,3 +19,20 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/imgs/
+
+fonts:
+  - family: Poppins
+    fonts:
+      - asset: fonts/Poppins-Regular.ttf
+      - asset: fonts/Poppins-Thin.ttf
+        style: thin
+      - asset: fonts/Poppins-Bold.ttf
+        style: bold
+  - family: Roboto
+    fonts:
+      - asset: fonts/Roboto-Regular.ttf
+      - asset: fonts/Roboto-Bold.ttf
+        style: bold
