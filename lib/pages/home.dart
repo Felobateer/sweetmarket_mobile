@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: Appbar(
         left: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(5.0),
             child: Image.asset('assets/imgs/sweetmarketLogo.png',
                 width: 48, height: 48, fit: BoxFit.cover)),
         right: Container(
