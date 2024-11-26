@@ -81,7 +81,7 @@ class Productdescription extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SvgPicture.asset(
-                  'assets/icons/ratingstar.svg',
+                  'assets/icons/ratingStar.svg',
                   width: 16,
                   height: 16,
                   color: Colors.yellow,

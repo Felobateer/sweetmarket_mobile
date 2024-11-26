@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sweetmarket/pages/home.dart';
+import 'package:sweetmarket/pages/index.dart';
 import 'auth/login_screen.dart';
 import 'auth/register_screen.dart';
 import 'auth/forgot_password_screen.dart';
@@ -21,7 +22,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const Home(),
+        '/': (context) => const IndexPage(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
