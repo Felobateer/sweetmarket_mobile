@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class customsubText extends StatelessWidget {
   final String text;
-  const customsubText({required this.text, super.key});
+  final Color color;
+  const customsubText({required this.text, required this.color, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class customsubText extends StatelessWidget {
       style: TextStyle(
         fontSize: 16,
         fontFamily: 'Poppins',
-        color: Colors.grey,
+        color: color,
         fontWeight: FontWeight.w400,
       ),
     );

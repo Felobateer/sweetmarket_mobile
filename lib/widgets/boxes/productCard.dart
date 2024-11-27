@@ -76,7 +76,10 @@ class Productdescription extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            customsubText(text: product.store),
+            customsubText(
+              text: product.store,
+              color: Colors.black26,
+            ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -87,10 +90,14 @@ class Productdescription extends StatelessWidget {
                   color: Colors.yellow,
                 ),
                 const SizedBox(width: 5),
-                customText(text: product.rating.toString()),
+                customText(
+                  text: product.rating.toString(),
+                  color: Colors.black,
+                ),
                 const SizedBox(width: 5),
                 customsubText(
                   text: '(${product.ratersNum})',
+                  color: Colors.black38,
                 ),
               ],
             ),
@@ -99,6 +106,7 @@ class Productdescription extends StatelessWidget {
         const SizedBox(height: 10),
         customText(
           text: product.name,
+          color: Colors.black,
         ),
         const SizedBox(height: 10),
         product.discount != null
@@ -107,15 +115,18 @@ class Productdescription extends StatelessWidget {
                 children: [
                   customsubText(
                     text: product.discount.toString(),
+                    color: Colors.red,
                   ),
                   const SizedBox(width: 10),
                   customText(
                     text: product.price.toString(),
+                    color: Colors.black45,
                   ),
                 ],
               )
             : customText(
                 text: product.price.toString(),
+                color: Colors.black45,
               ),
       ],
     );

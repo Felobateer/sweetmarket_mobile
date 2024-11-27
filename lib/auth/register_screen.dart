@@ -18,7 +18,10 @@ class RegisterScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TitleCustom(text: 'sweetmarket'),
+              TitleCustom(
+                text: 'sweetmarket',
+                color: Color(0xFFD97706),
+              ),
               SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

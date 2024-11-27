@@ -86,7 +86,6 @@ class HeroSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              // Empty container to hold the Image and the Column
               Expanded(
                 child: Container(
                   alignment: Alignment.centerRight,
@@ -100,14 +99,16 @@ class HeroSection extends StatelessWidget {
             ],
           ),
           Positioned(
-              left: 20, // Adjust position from the right side
-              top: 30, // Adjust position from the top side
+              left: 20,
+              top: 30,
               child: SizedBox(
                 width: 175,
                 child: Column(
                   children: [
                     customsubTitle(
-                        text: 'All Your Favorite Snacks Gathered in One Place'),
+                      text: 'All Your Favorite Snacks Gathered in One Place',
+                      color: Colors.black87,
+                    ),
                     const SizedBox(height: 20),
                     Colorbtn(
                       text: 'Shop Now',
@@ -137,12 +138,18 @@ class CategoryList extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                customText(text: 'Shop By Category'),
+                customText(
+                  text: 'Shop By Category',
+                  color: Colors.black54,
+                ),
                 // const SizedBox(width: ),
                 Transparentbtn(
                     content: 'show Categories',
                     action: () => print('categories clicked'),
-                    child: customText(text: 'Show all'))
+                    child: customText(
+                      text: 'Show all',
+                      color: Colors.indigo,
+                    ))
               ],
             )),
         Padding(
@@ -178,7 +185,10 @@ class Foryou extends StatelessWidget {
           children: [
             Row(
               children: [
-                customsubTitle(text: 'For You'),
+                customsubTitle(
+                  text: 'For You',
+                  color: Colors.black54,
+                ),
                 const SizedBox(width: 10),
                 SvgPicture.asset(
                   'assets/icons/rightArrow.svg',
@@ -186,6 +196,9 @@ class Foryou extends StatelessWidget {
                   height: 18,
                 )
               ],
+            ),
+            const SizedBox(
+              height: 10,
             ),
             SizedBox(
               height: 425,

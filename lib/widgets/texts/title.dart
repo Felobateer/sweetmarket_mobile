@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class TitleCustom extends StatelessWidget {
   final String text;
-  const TitleCustom({required this.text, super.key});
+  final Color color;
+  const TitleCustom({required this.color, required this.text, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class TitleCustom extends StatelessWidget {
         style: TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFD97706),
+          color: color ?? Color(0xFFD97706),
           height: 1.5,
         ),
         textAlign: TextAlign.center);

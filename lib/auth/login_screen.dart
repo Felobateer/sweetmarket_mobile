@@ -17,7 +17,10 @@ class LoginScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                TitleCustom(text: 'sweetmarket'),
+                TitleCustom(
+                  text: 'sweetmarket',
+                  color: Color(0xFFD97706),
+                ),
                 const SizedBox(height: 40),
                 FormInput(label: 'Email', hint: 'joe@example.com'),
                 const SizedBox(height: 20),

@@ -34,6 +34,7 @@ class CategoryCard extends StatelessWidget {
             const SizedBox(height: 10),
             customText(
               text: category.name,
+              color: Colors.black,
             ),
           ],
         ),
