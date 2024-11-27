@@ -5,6 +5,7 @@ import 'package:sweetmarket/services/models/products.dart';
 import 'package:sweetmarket/widgets/boxes/appBar.dart';
 import 'package:sweetmarket/widgets/boxes/categoryCard.dart';
 import 'package:sweetmarket/widgets/boxes/filterDropdown.dart';
+import 'package:sweetmarket/widgets/boxes/marketCard.dart';
 import 'package:sweetmarket/widgets/boxes/productCard.dart';
 
 class Market extends StatelessWidget {
@@ -13,30 +14,7 @@ class Market extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(56),
-        child: Appbar(
-          right: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Image.asset(
-                  'assets/imgs/sweetmarketLogo.png',
-                  width: 48,
-                  height: 48,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: const SearchInput(),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: MarketAppbar(),
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
@@ -53,6 +31,33 @@ class Market extends StatelessWidget {
       ),
     );
   }
+}
+
+class MarketAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const MarketAppbar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Appbar(
+      left: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset(
+          'assets/imgs/sweetmarketLogo.png',
+          fit: BoxFit.cover,
+        ),
+      ),
+      right: Expanded(
+        child: Container(
+          padding:
+              const EdgeInsets.only(right: 10, left: 56, top: 8, bottom: 8),
+          child: const SearchInput(),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
 class SearchInput extends StatelessWidget {
@@ -100,16 +105,13 @@ class FilterDropdowns extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ensure filters is not null by using an empty list as fallback.
-    final safeFilters = filters ?? [];
-
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: safeFilters.length,
+      itemCount: filters.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(right: 10),
-          child: Filterdropdown(filter: safeFilters[index]),
+          child: Filterdropdown(filter: filters[index]),
         );
       },
     );
@@ -122,7 +124,6 @@ class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Ensure categories is not null by using an empty list as fallback.
-    final safeCategories = categories ?? [];
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -130,11 +131,11 @@ class CategoryList extends StatelessWidget {
         height: 175,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: safeCategories.length,
+          itemCount: categories.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(right: 20),
-              child: CategoryCard(category: safeCategories[index]),
+              child: CategoryCard(category: categories[index]),
             );
           },
         ),
@@ -148,20 +149,13 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ensure products is not null by using an empty list as fallback.
-    final safeProducts = products ?? [];
-
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: safeProducts.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: Productcard(product: safeProducts[index]),
-          );
-        },
+    return Center(
+      child: Wrap(
+        spacing: 5.0,
+        runSpacing: 4.0,
+        children: products.map((product) {
+          return Marketcard(product: product);
+        }).toList(),
       ),
     );
   }
