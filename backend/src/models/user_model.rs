@@ -22,15 +22,15 @@ pub struct Users {
 impl Users {
     pub fn init() -> Result<Self, String> {
         let db_path = Path::new("backend/src/database/users_data.db");
-        let conn = Connection::open(db_path).unwrap();
+        let conn = Connection::open(db_path).map_err(|e| format!("Failed to open DB: {}", e))?;
 
         conn.execute(
             "CREATE TABLE IF NOT EXISTS Users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            firstName TEXT NOT NULL,
-            lastName TEXT NOT NULL,
-            phoneNumber INTEGER NOT NULL,
-            dateOfBirth TEXT NULL,
+            first_name TEXT NOT NULL,
+            last_name TEXT NOT NULL,
+            phone_number TEXT NOT NULL,
+            date_of_birth TEXT NULL,
             email TEXT NOT NULL,
             password TEXT NOT NULL
         )",
@@ -43,7 +43,7 @@ impl Users {
     pub fn add(&self, entry: User) -> Result<(), String> {
         let mut conn = self.conn.lock().unwrap();
         let tx = conn.transaction().map_err(|e| e.to_string())?;
-        tx.execute("INSERT INTO Users (firstName, lastName, phoneNumber, dateOfBirth, email, password) VALUES (?, ?, ?, ?, ?, ?)", params![entry.first_name, entry.last_name, entry.phone_number, entry.date_of_birth, entry.email, entry.password]).map_err(|e| e.to_string())?;
+        tx.execute("INSERT INTO Users (first_name, last_name, phone_number, date_of_birth, email, password) VALUES (?, ?, ?, ?, ?, ?)", params![entry.first_name, entry.last_name, entry.phone_number, entry.date_of_birth, entry.email, entry.password]).map_err(|e| e.to_string())?;
         tx.commit().map_err(|e| e.to_string())?;
         Ok(())
     }
@@ -51,14 +51,14 @@ impl Users {
     pub fn edit(&self, entry: User) -> Result<(), String> {
         let mut conn = self.conn.lock().unwrap();
         let tx = conn.transaction().map_err(|e| e.to_string())?;
-        tx.execute("UPDATE Users SET firstName = ?, lastName = ?, phoneNumber = ?, dateOfBirth = ?, email = ?, password = ? WHERE id = ?", params![entry.first_name, entry.last_name, entry.phone_number, entry.date_of_birth, entry.email, entry.password, entry.id]).map_err(|e| e.to_string())?;
+        tx.execute("UPDATE Users SET first_name = ?, last_name = ?, phone_number = ?, date_of_birth = ?, email = ?, password = ? WHERE id = ?", params![entry.first_name, entry.last_name, entry.phone_number, entry.date_of_birth, entry.email, entry.password, entry.id]).map_err(|e| e.to_string())?;
         tx.commit().map_err(|e| e.to_string())?;
         Ok(())
     }
 
     pub fn get_by_id(&self, id: &u32) -> Result<User, String> {
         let conn = self.conn.lock().unwrap();
-        let mut stmt = conn.prepare("SELECT id, firstName, lastName, phoneNumber, dateOfBirth, email, password FROM Users WHERE id = ?").map_err(|e| e.to_string())?;
+        let mut stmt = conn.prepare("SELECT id, first_name, last_name, phone_number, date_of_birth, email, password FROM Users WHERE id = ?").map_err(|e| e.to_string())?;
         let User = stmt.query_row([id], |row| {
             Ok(User {
                 id: row.get(0)?,
@@ -67,7 +67,7 @@ impl Users {
                 phone_number: row.get(3)?,
                 date_of_birth: row.get(4)?,
                 email: row.get(5)?,
-                password: "".to_string(),
+                password: row.get(6)?,
             })
         }).map_err(|e| e.to_string())?;
         Ok(User)
@@ -75,7 +75,7 @@ impl Users {
     
     pub fn get_all(&self) -> Result<Vec<User>, String> {
         let conn = self.conn.lock().unwrap();
-        let mut stmt = conn.prepare("SELECT id, firstName, lastName, phoneNumber, dateOfBirth, email FROM Users").map_err(|e| e.to_string())?;
+        let mut stmt = conn.prepare("SELECT id, first_name, last_name, phone_number, date_of_birth, email FROM Users").map_err(|e| e.to_string())?;
         let Users = stmt.query_map([], |row| {
             Ok(User {
                 id: row.get(0)?,
@@ -84,6 +84,7 @@ impl Users {
                 phone_number: row.get(3)?,
                 date_of_birth: row.get(4)?,
                 email: row.get(5)?,
+                password: "".to_string(),
             })
         }).map_err(|e| e.to_string())?;
 
