@@ -31,6 +31,10 @@ migrate_working_dir/
 .pub/
 /build/
 
+# backend
+.env
+/backend/target/
+
 # Symbolication related
 app.*.symbols
 
