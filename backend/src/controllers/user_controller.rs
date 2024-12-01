@@ -1,3 +1,5 @@
-pub async fn index() -> &'static str {
-    "Welcome to the Rocket App!"
-}
+#[macro_use] extern crate rocket;
+
+use services::UserService;
+
+
