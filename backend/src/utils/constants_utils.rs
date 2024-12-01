@@ -1,6 +1,6 @@
 
 
-pub mod constants {
+pub mod Constants {
 
     pub const user_db_path: &str = "backend/src/database/user_data.db";
     pub const product_db_path: &str = "backend/src/database/product_data.db";
