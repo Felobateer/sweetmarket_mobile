@@ -1,15 +1,15 @@
 use std::sync::Arc;
 
-pub fn payment_routes(payments: Arc<Payments>) -> impl Fn(&str, Option<&str>, Option<&Payment>) -> Result<String, String> {
+pub fn rate_routes(rates: Arc<Rates>) -> impl Fn(&str, Option<&str>, Option<&Rate>) -> Result<String, String> {
     move |action, id, body| match action {
-        "get_all" => match payments.get_all() {
-            Ok(payment_list) => Ok(format!("{:?}", payment_list)),
+        "get_all" => match rates.get_all() {
+            Ok(rate_list) => Ok(format!("{:?}", rate_list)),
             Err(err) => Err(err),
         },
         "get_by_id" => {
             if let Some(id) = id.and_then(|id| id.parse().ok()) {
-                match payments.get_by_id(&id) {
-                    Ok(payment) => Ok(format!("{:?}", payment)),
+                match rates.get_by_id(&id) {
+                    Ok(rate) => Ok(format!("{:?}", rate)),
                     Err(err) => Err(err),
                 }
             } else {
@@ -17,22 +17,22 @@ pub fn payment_routes(payments: Arc<Payments>) -> impl Fn(&str, Option<&str>, Op
             }
         }
         "add" => {
-            if let Some(payment) = body {
-                payments.add(payment.clone()).map(|_| "Payment added successfully".into())
+            if let Some(rate) = body {
+                rates.add(rate.clone()).map(|_| "Rate added successfully".into())
             } else {
                 Err("Invalid body".into())
             }
         }
         "edit" => {
-            if let Some(payment) = body {
-                payments.edit(payment.clone()).map(|_| "Payment updated successfully".into())
+            if let Some(rate) = body {
+                rates.edit(rate.clone()).map(|_| "Rate updated successfully".into())
             } else {
                 Err("Invalid body".into())
             }
         }
         "delete" => {
             if let Some(id) = id.and_then(|id| id.parse().ok()) {
-                payments.delete(&id).map(|_| "Payment deleted successfully".into())
+                rates.delete(&id).map(|_| "Rate deleted successfully".into())
             } else {
                 Err("Invalid ID".into())
             }
